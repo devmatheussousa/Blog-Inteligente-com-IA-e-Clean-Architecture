@@ -1,5 +1,6 @@
 package domain.entity;
 
+import domain.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -40,6 +41,8 @@ public class User {
     @Column(name = "fotoUrl")
     private String fotoUrl;
 
+    @Enumerated(EnumType.STRING) // Armazenar o enum como string no banco de dados
+    @Column(nullable = false)
     private Role role;
 
     @CreationTimestamp
@@ -49,9 +52,4 @@ public class User {
     @UpdateTimestamp
     @Column(name = "updatedAt")
     private LocalDateTime updatedAt;
-
-    public enum Role{
-        USER,
-        ADMIN
-    }
 }
