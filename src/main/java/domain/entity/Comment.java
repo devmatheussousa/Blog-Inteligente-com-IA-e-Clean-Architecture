@@ -40,7 +40,6 @@ public class Comment {
     @Column(name = "author_email", length = 255)
     private String authorEmail;
 
-    @Builder.Default //Usamos @Builder.Default para garantir que o valor padrão seja aplicado mesmo quando o objeto for criado usando o builder, evitando que o campo seja nulo.
     @Column(nullable = false)
     private Boolean approved = Boolean.FALSE; //Campo para indicar se o comentário foi aprovado, permitindo controle sobre a moderação dos comentários.
 
@@ -52,7 +51,6 @@ public class Comment {
     @JoinColumn(name = "parent_id") //Especifica a coluna de junção para a relação Many-to-One com o próprio Comment, permitindo que um comentário possa ter um comentário pai, facilitando a criação de threads de comentários.
     private Comment parent; //Campo para armazenar a referência ao comentário pai, permitindo a criação de threads de comentários e respostas aninhadas.
 
-    @Builder.Default
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true) //Indica que a relação One-to-Many com o próprio Comment é mapeada pela propriedade "parent", permitindo que um comentário possa ter múltiplos comentários filhos (respostas). O uso de cascade = CascadeType.ALL garante que as operações de persistência sejam propagadas para os comentários filhos, e orphanRemoval = true garante que os comentários filhos sejam removidos quando o comentário pai for excluído.)
     private List<Comment> replies; //Campo para armazenar a lista de comentários filhos (respostas), permitindo a criação de threads de comentários e respostas aninhadas.
 

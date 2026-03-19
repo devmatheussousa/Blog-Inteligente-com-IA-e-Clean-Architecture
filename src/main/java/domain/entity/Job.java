@@ -44,7 +44,6 @@ public class Job {
     @Column(name = "error_message", length = 1000)
     private String errorMessage; //Campo para armazenar mensagens de erro caso o job falhe, permitindo rastrear e diagnosticar problemas durante a execução do job.
 
-    @Builder.Default //Usamos @Builder.Default para garantir que o valor padrão seja aplicado mesmo quando o objeto for criado usando o builder, evitando que o campo seja nulo.
     @Column(nullable = false)
     private Integer attempts; //Campo para armazenar o número de tentativas de execução do job, permitindo implementar lógica de retry em caso de falhas.
 
